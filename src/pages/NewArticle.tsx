@@ -29,8 +29,8 @@ import { fetchArticles } from "@/features/articleSlice";
 import { Textarea } from "@/components/ui/textarea";
 
 import EditCategoryButton from "@/components/EditCategoryButton";
-import DeleteCategoryButton from "@/components/deleteCategoryButton";
 import AddCategoryButton from "@/components/AddCategoryButton";
+import DeleteCategoryButton from "@/components/DeleteCategoryButton";
 
 const NewArticle = () => {
   const navigate = useNavigate();
@@ -151,22 +151,25 @@ const NewArticle = () => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {categories && categories?.map((item) => (
-                      <div className="flex justify-between items-center w-full gap-2">
-                        <SelectItem value={String(item.id)}>
-                          {item.name}
-                        </SelectItem>
+                    {categories &&
+                      categories?.map((item) => (
+                        <div className="flex justify-between items-center w-full gap-2">
+                          <SelectItem value={String(item.id)}>
+                            {item.name}
+                          </SelectItem>
 
-                        <div className="flex items-center gap-2">
-                          <EditCategoryButton
-                            categoryId={item.documentId}
-                            currentName={item.name}
-                          />
+                          <div className="flex items-center gap-2">
+                            <EditCategoryButton
+                              categoryId={item.documentId}
+                              currentName={item.name}
+                            />
 
-                          <DeleteCategoryButton categoryId={item.documentId} />
+                            <DeleteCategoryButton
+                              categoryId={item.documentId}
+                            />
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
                   </SelectContent>
                 </Select>
 

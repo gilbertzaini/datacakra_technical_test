@@ -31,8 +31,8 @@ import { Article } from "@/interfaces/articles";
 import { Textarea } from "@/components/ui/textarea";
 
 import EditCategoryButton from "@/components/EditCategoryButton";
-import DeleteCategoryButton from "@/components/deleteCategoryButton";
 import AddCategoryButton from "@/components/AddCategoryButton";
+import DeleteCategoryButton from "@/components/DeleteCategoryButton";
 
 const EditArticle = () => {
   const { id } = useParams<string>();
