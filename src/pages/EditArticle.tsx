@@ -194,7 +194,7 @@ const EditArticle = () => {
                         <div className="flex items-center gap-2">
                           <EditCategoryButton
                             categoryId={item.documentId}
-                            initialName={item.name}
+                            currentName={item.name}
                           />
 
                           <DeleteCategoryButton categoryId={item.documentId} />
@@ -213,7 +213,7 @@ const EditArticle = () => {
 
         <div className="flex items-center gap-4 justify-start">
           <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Submitting..." : "Submit"}
+            {isSubmitting ? "Updating..." : "Update"}
           </Button>{" "}
           <Button
             onClick={() => handleDelete(id)}

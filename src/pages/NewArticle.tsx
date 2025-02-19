@@ -151,7 +151,7 @@ const NewArticle = () => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {categories?.map((item) => (
+                    {categories && categories?.map((item) => (
                       <div className="flex justify-between items-center w-full gap-2">
                         <SelectItem value={String(item.id)}>
                           {item.name}
@@ -160,7 +160,7 @@ const NewArticle = () => {
                         <div className="flex items-center gap-2">
                           <EditCategoryButton
                             categoryId={item.documentId}
-                            initialName={item.name}
+                            currentName={item.name}
                           />
 
                           <DeleteCategoryButton categoryId={item.documentId} />
@@ -171,7 +171,6 @@ const NewArticle = () => {
                 </Select>
 
                 <AddCategoryButton />
-
               </div>
               <FormMessage />
             </FormItem>
@@ -180,7 +179,7 @@ const NewArticle = () => {
 
         <div className="flex items-center gap-4 justify-start">
           <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Submitting..." : "Submit"}
+            {isSubmitting ? "Creating..." : "Create"}
           </Button>{" "}
         </div>
       </form>

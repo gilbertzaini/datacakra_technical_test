@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
@@ -15,19 +15,27 @@ import {
 import { AppDispatch } from "@/store";
 import { fetchCategories } from "@/features/articleSlice";
 import { useDispatch } from "react-redux";
-
-const ChangeCategoryDialog = ({
+const EditCategoryButton = ({
   categoryId,
   currentName,
 }: {
   categoryId: string;
-  currentName: string;
+  currentName: any;
 }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const [name, setName] = useState(currentName);
+  const [name, setName] = useState(currentName || "");
   const [error, setError] = useState("");
+
+  // Sync name state when the dialog opens
+  useEffect(() => {
+    console.log(currentName);
+
+    if (open) {
+      setName(currentName);
+    }
+  }, [currentName, open]);
 
   const handleEditCategory = async () => {
     if (name.trim().length < 3) {
@@ -64,8 +72,29 @@ const ChangeCategoryDialog = ({
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
-      {/* Trigger Button */}
-      <Button onClick={() => setOpen(true)}>Edit</Button>
+      <button
+        className="bg-[#f5f5f5] p-1 text-sm rounded aspect-square flex items-center"
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        <svg
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="15"
+          height="15"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+          />
+        </svg>
+      </button>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Edit Category</AlertDialogTitle>
@@ -86,13 +115,7 @@ const ChangeCategoryDialog = ({
           >
             Cancel
           </AlertDialogCancel>
-          {/* Action Button */}
-          <Button
-            disabled={isLoading}
-            onClick={() => {
-              handleEditCategory();
-            }}
-          >
+          <Button disabled={isLoading} onClick={handleEditCategory}>
             {isLoading ? "Updating..." : "Update"}
           </Button>
         </AlertDialogFooter>
@@ -101,4 +124,4 @@ const ChangeCategoryDialog = ({
   );
 };
 
-export default ChangeCategoryDialog;
+export default EditCategoryButton;
