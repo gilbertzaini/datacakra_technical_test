@@ -94,7 +94,7 @@ const Login = () => {
 
         <div className="flex items-center gap-4 justify-start">
           <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Logging in..." : "Submit"}
+            {isSubmitting ? "Logging in..." : "Log In"}
           </Button>{" "}
           <button
             onClick={() => navigate("/register")}
